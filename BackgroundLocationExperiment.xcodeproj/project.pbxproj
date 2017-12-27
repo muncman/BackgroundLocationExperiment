@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		383FC4401FF4366B0088DF8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FC43F1FF4366B0088DF8B /* AppDelegate.swift */; };
 		383FC4421FF4366B0088DF8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FC4411FF4366B0088DF8B /* ViewController.swift */; };
-		383FC4451FF4366B0088DF8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383FC4431FF4366B0088DF8B /* Main.storyboard */; };
 		383FC4471FF4366B0088DF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383FC4461FF4366B0088DF8B /* Assets.xcassets */; };
 		383FC44A1FF4366B0088DF8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383FC4481FF4366B0088DF8B /* LaunchScreen.storyboard */; };
 		383FC4551FF4366C0088DF8B /* BackgroundLocationExperimentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FC4541FF4366C0088DF8B /* BackgroundLocationExperimentTests.swift */; };
+		383FC4681FF45FE40088DF8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383FC4671FF45FE40088DF8B /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +29,13 @@
 		383FC43C1FF4366B0088DF8B /* BackgroundLocationExperiment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackgroundLocationExperiment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		383FC43F1FF4366B0088DF8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		383FC4411FF4366B0088DF8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		383FC4441FF4366B0088DF8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		383FC4461FF4366B0088DF8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		383FC4491FF4366B0088DF8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		383FC44B1FF4366B0088DF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		383FC4501FF4366C0088DF8B /* BackgroundLocationExperimentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BackgroundLocationExperimentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		383FC4541FF4366C0088DF8B /* BackgroundLocationExperimentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLocationExperimentTests.swift; sourceTree = "<group>"; };
 		383FC4561FF4366C0088DF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		383FC4671FF45FE40088DF8B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 				383FC4461FF4366B0088DF8B /* Assets.xcassets */,
 				383FC44B1FF4366B0088DF8B /* Info.plist */,
 				383FC4481FF4366B0088DF8B /* LaunchScreen.storyboard */,
-				383FC4431FF4366B0088DF8B /* Main.storyboard */,
+				383FC4671FF45FE40088DF8B /* Main.storyboard */,
 				383FC4411FF4366B0088DF8B /* ViewController.swift */,
 			);
 			path = BackgroundLocationExperiment;
@@ -179,9 +179,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				383FC4681FF45FE40088DF8B /* Main.storyboard in Resources */,
 				383FC44A1FF4366B0088DF8B /* LaunchScreen.storyboard in Resources */,
 				383FC4471FF4366B0088DF8B /* Assets.xcassets in Resources */,
-				383FC4451FF4366B0088DF8B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,14 +223,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		383FC4431FF4366B0088DF8B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				383FC4441FF4366B0088DF8B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		383FC4481FF4366B0088DF8B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
