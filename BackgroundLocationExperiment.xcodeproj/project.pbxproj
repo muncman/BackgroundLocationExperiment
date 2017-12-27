@@ -78,11 +78,11 @@
 			isa = PBXGroup;
 			children = (
 				383FC43F1FF4366B0088DF8B /* AppDelegate.swift */,
-				383FC4411FF4366B0088DF8B /* ViewController.swift */,
-				383FC4431FF4366B0088DF8B /* Main.storyboard */,
 				383FC4461FF4366B0088DF8B /* Assets.xcassets */,
-				383FC4481FF4366B0088DF8B /* LaunchScreen.storyboard */,
 				383FC44B1FF4366B0088DF8B /* Info.plist */,
+				383FC4481FF4366B0088DF8B /* LaunchScreen.storyboard */,
+				383FC4431FF4366B0088DF8B /* Main.storyboard */,
+				383FC4411FF4366B0088DF8B /* ViewController.swift */,
 			);
 			path = BackgroundLocationExperiment;
 			sourceTree = "<group>";
