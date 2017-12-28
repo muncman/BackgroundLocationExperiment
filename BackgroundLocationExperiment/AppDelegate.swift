@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var locationManager: LocationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            var errorInfo = ""
+            if let error = error {
+                errorInfo = " Error: \(String(describing: error))"
+            }
+            print("Request for notifications allowed? \(granted)\(errorInfo)")
+        }
+        
         if let options = launchOptions, let _ = options[UIApplicationLaunchOptionsKey.location] {
             print("Launched by location")
         }

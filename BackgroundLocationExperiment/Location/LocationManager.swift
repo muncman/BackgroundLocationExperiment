@@ -8,12 +8,14 @@
 
 import Foundation
 import CoreLocation
+import UserNotifications
 
 let LocationUpdatedNotification = NSNotification.Name("BackLoc.LocationUpdated.Notification")
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
+    private let persistenceKey = "BackLoc.LocationsKey"
     
     // MARK: - Lifecycle Methods
     
@@ -34,7 +36,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.delegate = nil
     }
     
-    // MARK: Process Methods
+    // MARK: - Process Methods
     
     func startUpdatingLocation() {
         let auth = CLLocationManager.authorizationStatus()
@@ -47,13 +49,77 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    // MARK: Delegate Methods
+    // MARK: - Delegate Methods
     
+    // Hit three times at launch
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        for loc in locations {
-            print("\(loc)")
-            NotificationCenter.default.post(name: LocationUpdatedNotification, object: loc)
+        guard let loc = locations.last else { return }
+        
+        print("\(loc)")
+        save(loc)
+        NotificationCenter.default.post(name: LocationUpdatedNotification, object: loc)
+        // FIXME: notifications not working
+        let locationNotificationContent = UNMutableNotificationContent()
+        locationNotificationContent.title = "Location Updated"
+        locationNotificationContent.subtitle = "Again"
+        locationNotificationContent.body = "\(loc)"
+        let localNotificationRequest = UNNotificationRequest(identifier: "LocUpdate",
+                                                             content: locationNotificationContent,
+                                                             trigger: nil)
+        UNUserNotificationCenter.current().add(localNotificationRequest) { (error) in
+            if let error = error {
+                print("Error requesting user notification: \(error)")
+            }
+            else { print("all good posting notification?") } // TODO: remove else clause
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location Error! \(error)")
+    }
+    
+    // MARK: - Public Methods
+    
+    // FIXME: not triggering anything? (maybe a simulator issue? test on actual device)
+    public func getCurrentLocation() {
+        print("Requesting current location data")
+        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
+    }
+    
+    // MARK: - Persistence Methods
+    
+    public func getAllLocations() -> Array<Any>? {
+        if let priorLocations = UserDefaults.standard.array(forKey: persistenceKey) {
+            return priorLocations
+        }
+        return nil
+    }
+    
+    public func clearOldLocations() {
+        UserDefaults.standard.set(nil, forKey: persistenceKey)
+    }
+    
+    /** Naive persistence. */
+    private func save(_ loc: CLLocation) {
+        var locations: NSMutableOrderedSet
+        if let priorLocations = getAllLocations() {
+            locations = NSMutableOrderedSet()
+            locations.addObjects(from: priorLocations)
+            locations.add(loc.shortString())
+        } else {
+            locations = [loc.shortString()]
+        }
+        let locArray = locations.array
+        UserDefaults.standard.set(locArray, forKey: persistenceKey)
+    }
+    
+}
+
+extension CLLocation {
+    
+    func shortString() -> String {
+        return "Time: \(timestamp) Lat: \(coordinate.latitude) Long: \(coordinate.longitude)"
     }
     
 }

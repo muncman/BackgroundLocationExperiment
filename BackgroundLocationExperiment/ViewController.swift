@@ -22,8 +22,7 @@ class ViewController: UIViewController {
             
             guard let loc = notification.object as? CLLocation else { return }
             
-            self?.lastUpdateLabel.text = "\(Date())"
-            self?.lastLocationLabel.text = "\(loc)"
+            self?.updateLabels(for: loc)
         })
     }
     
@@ -33,6 +32,27 @@ class ViewController: UIViewController {
         if locationUpdateObserver != nil {
             NotificationCenter.default.removeObserver(locationUpdateObserver!)
         }
+    }
+    
+    // MARK: - Interface Methods
+    
+    private func updateLabels(for loc: CLLocation) {
+        lastUpdateLabel.text = "\(Date())"
+        lastLocationLabel.text = "\(loc)"
+    }
+    
+    // MARK: - Action Methods
+    
+    @IBAction func getLocation() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let locMgr = appDelegate.locationManager
+        locMgr?.getCurrentLocation()
+    }
+    
+    @IBAction func clearLocations() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let locMgr = appDelegate.locationManager
+        locMgr?.clearOldLocations()
     }
     
 }
