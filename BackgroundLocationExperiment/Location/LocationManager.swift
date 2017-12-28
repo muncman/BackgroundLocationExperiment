@@ -9,6 +9,8 @@
 import Foundation
 import CoreLocation
 
+let LocationUpdatedNotification = NSNotification.Name("BackLoc.LocationUpdated.Notification")
+
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
@@ -50,6 +52,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for loc in locations {
             print("\(loc)")
+            NotificationCenter.default.post(name: LocationUpdatedNotification, object: loc)
         }
     }
     

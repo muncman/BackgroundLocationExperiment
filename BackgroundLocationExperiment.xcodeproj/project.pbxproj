@@ -12,6 +12,7 @@
 		383FC4471FF4366B0088DF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383FC4461FF4366B0088DF8B /* Assets.xcassets */; };
 		383FC44A1FF4366B0088DF8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383FC4481FF4366B0088DF8B /* LaunchScreen.storyboard */; };
 		383FC4551FF4366C0088DF8B /* BackgroundLocationExperimentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FC4541FF4366C0088DF8B /* BackgroundLocationExperimentTests.swift */; };
+		383FC4601FF439CB0088DF8B /* LocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FC45F1FF439CB0088DF8B /* LocationsTableViewController.swift */; };
 		383FC4631FF4568E0088DF8B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FC4621FF4568E0088DF8B /* LocationManager.swift */; };
 		383FC4661FF456A40088DF8B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383FC4651FF456A40088DF8B /* CoreLocation.framework */; };
 		383FC4681FF45FE40088DF8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383FC4671FF45FE40088DF8B /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		383FC4501FF4366C0088DF8B /* BackgroundLocationExperimentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BackgroundLocationExperimentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		383FC4541FF4366C0088DF8B /* BackgroundLocationExperimentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLocationExperimentTests.swift; sourceTree = "<group>"; };
 		383FC4561FF4366C0088DF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		383FC45F1FF439CB0088DF8B /* LocationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTableViewController.swift; sourceTree = "<group>"; };
 		383FC4621FF4568E0088DF8B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		383FC4651FF456A40088DF8B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		383FC4671FF45FE40088DF8B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				383FC4621FF4568E0088DF8B /* LocationManager.swift */,
+				383FC45F1FF439CB0088DF8B /* LocationsTableViewController.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				383FC4631FF4568E0088DF8B /* LocationManager.swift in Sources */,
 				383FC4421FF4366B0088DF8B /* ViewController.swift in Sources */,
 				383FC4401FF4366B0088DF8B /* AppDelegate.swift in Sources */,
+				383FC4601FF439CB0088DF8B /* LocationsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

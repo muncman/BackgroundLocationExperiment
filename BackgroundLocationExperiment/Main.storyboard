@@ -26,24 +26,48 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal: Frequent reporting of location even when in the background." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SID-k4-UEu">
-                                <rect key="frame" x="29" y="237" width="317.5" height="41"/>
+                                <rect key="frame" x="29" y="325" width="317.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.93282389431043511" green="0.93943359375000002" blue="0.93710141081798703" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Updated" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q5d-dc-e6z">
+                                <rect key="frame" x="135.5" y="0.0" width="103.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.90656249999999994" green="0.90656249999999994" blue="0.90656249999999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Location" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0S-AM-dOc">
+                                <rect key="frame" x="136" y="53" width="103" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.90656250000000005" green="0.90656250000000005" blue="0.90656250000000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ntK-F5-5LK" secondAttribute="bottom" constant="100" id="0Fj-st-fmd"/>
+                            <constraint firstItem="Q5d-dc-e6z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="136" id="2xT-wC-J0V"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Q5d-dc-e6z" secondAttribute="trailing" constant="136" id="7QV-PD-3Y1"/>
+                            <constraint firstItem="Q5d-dc-e6z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ChD-k1-OvU"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SID-k4-UEu" secondAttribute="trailing" constant="20" symbolic="YES" id="EMP-Tl-AqX"/>
+                            <constraint firstItem="H0S-AM-dOc" firstAttribute="top" secondItem="Q5d-dc-e6z" secondAttribute="bottom" constant="32" id="Htm-r9-8hm"/>
                             <constraint firstItem="ntK-F5-5LK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KOd-Sf-E7c"/>
-                            <constraint firstItem="SID-k4-UEu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-44" id="LCz-m2-7lb"/>
+                            <constraint firstItem="SID-k4-UEu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="44" id="LCz-m2-7lb"/>
                             <constraint firstItem="SID-k4-UEu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="Li5-Sk-Ric"/>
                             <constraint firstItem="SID-k4-UEu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NxJ-CV-aPL"/>
+                            <constraint firstItem="Q5d-dc-e6z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="SXc-tN-Hij"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="H0S-AM-dOc" secondAttribute="trailing" constant="136" id="cdV-Ls-Yoc"/>
+                            <constraint firstItem="H0S-AM-dOc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="136" id="lqk-Bp-1fw"/>
+                            <constraint firstItem="H0S-AM-dOc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tsv-AD-RzE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Tdw-03-Ozu"/>
+                    <connections>
+                        <outlet property="lastLocationLabel" destination="H0S-AM-dOc" id="Rfj-ey-zaO"/>
+                        <outlet property="lastUpdateLabel" destination="Q5d-dc-e6z" id="cEf-XD-Y8g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
