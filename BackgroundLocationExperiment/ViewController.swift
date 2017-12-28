@@ -24,6 +24,13 @@ class ViewController: UIViewController {
             
             self?.updateLabels(for: loc)
         })
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let locMgr = appDelegate.locationManager, let locations = locMgr.getAllLocations(), let loc = locations.last as? String {
+            // TODO: nasty inconsistency (arising from storage mechanism)
+            lastUpdateLabel.text = "\(Date())"
+            lastLocationLabel.text = loc
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,9 +57,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearLocations() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let locMgr = appDelegate.locationManager
-        locMgr?.clearOldLocations()
+        let confirmation = UIAlertController(title: "Clear all location data?", message: "Are you sure?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (alert) in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let locMgr = appDelegate.locationManager
+            locMgr?.clearOldLocations()
+        }
+        confirmation.addAction(yesAction)
+        let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
+        confirmation.addAction(noAction)
+        present(confirmation, animated: true, completion: nil)
     }
     
 }

@@ -22,6 +22,14 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>All ur locations are belong to app purpose. (Always and When in Use)</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>All ur locations are belong to app purpose. (Always)</string>
+	<key>NSLocationUsageDescription</key>
+	<string>All ur locations are belong to app purpose. (Usage)</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>All ur locations are belong to app purpose. (When in Use)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -40,14 +48,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>All ur locations are belong to app purpose. (Always)</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>All ur locations are belong to app purpose. (Always and When in Use)</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>All ur locations are belong to app purpose. (When in Use)</string>
-	<key>NSLocationUsageDescription</key>
-	<string>All ur locations are belong to app purpose. (Usage)</string>
 </dict>
 </plist>

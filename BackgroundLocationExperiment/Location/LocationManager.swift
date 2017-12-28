@@ -16,19 +16,24 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
     private let persistenceKey = "BackLoc.LocationsKey"
+    private let secondsBetweenRecordingUpdates: TimeInterval = 60
+    private var lastUpdate = Date.distantPast
     
     // MARK: - Lifecycle Methods
     
     override init() {
         super.init()
         
-        print("Initializing a LocationManager")
+        print("Initializing a Location Manager: \(self)")
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.showsBackgroundLocationIndicator = true
         locationManager.distanceFilter = kCLDistanceFilterNone // default
+        
+        // TODO: Timer (here or app delegate?)
+        // TODO: There is much more to do here, later... 
     }
     
     deinit {
@@ -49,29 +54,41 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
+    // FIXME: notifications not working
+    private func postUserNotification(loc: CLLocation) {
+        let content = UNMutableNotificationContent()
+        content.title = "Location Updated"
+        content.subtitle = "Again"
+        content.body = "\(loc)"
+        content.sound = UNNotificationSound.default()
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false) // TODO: should not need
+        let request = UNNotificationRequest(identifier: "\(loc)", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("Error requesting user notification: \(error)")
+            }
+            else { print("all good posting notification?!") } // TODO: remove else clause
+        }
+    }
+    
     // MARK: - Delegate Methods
     
     // Hit three times at launch
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let loc = locations.last else { return }
         
+        // Throttle
+        let hasNotBeenLongEnough = lastUpdate.addingTimeInterval(secondsBetweenRecordingUpdates).compare(loc.timestamp) == ComparisonResult.orderedDescending
+        if hasNotBeenLongEnough {
+            return
+        }
+        lastUpdate = loc.timestamp
+        
         print("\(loc)")
         save(loc)
+        // TODO: play a sound
+        postUserNotification(loc: loc)
         NotificationCenter.default.post(name: LocationUpdatedNotification, object: loc)
-        // FIXME: notifications not working
-        let locationNotificationContent = UNMutableNotificationContent()
-        locationNotificationContent.title = "Location Updated"
-        locationNotificationContent.subtitle = "Again"
-        locationNotificationContent.body = "\(loc)"
-        let localNotificationRequest = UNNotificationRequest(identifier: "LocUpdate",
-                                                             content: locationNotificationContent,
-                                                             trigger: nil)
-        UNUserNotificationCenter.current().add(localNotificationRequest) { (error) in
-            if let error = error {
-                print("Error requesting user notification: \(error)")
-            }
-            else { print("all good posting notification?") } // TODO: remove else clause
-        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
