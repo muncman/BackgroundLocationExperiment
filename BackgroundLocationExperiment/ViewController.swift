@@ -15,14 +15,24 @@ class ViewController: UIViewController {
     @IBOutlet private weak var lastUpdateLabel: UILabel!
     private var locationUpdateObserver: NSObjectProtocol?
     
-    override func viewWillLayoutSubviews() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         locationUpdateObserver = NotificationCenter.default.addObserver(forName: LocationUpdatedNotification, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             
             guard let loc = notification.object as? CLLocation else { return }
             
-            self?.lastLocationLabel.text = "\(loc)"
             self?.lastUpdateLabel.text = "\(Date())"
+            self?.lastLocationLabel.text = "\(loc)"
         })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if locationUpdateObserver != nil {
+            NotificationCenter.default.removeObserver(locationUpdateObserver!)
+        }
     }
     
 }
