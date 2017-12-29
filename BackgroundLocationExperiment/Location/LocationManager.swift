@@ -6,7 +6,7 @@
 //  Copyright © 2017 Method Up. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 import UserNotifications
 
@@ -26,7 +26,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         print("Initializing a Location Manager: \(self)")
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation // TODO: test with simple 'Best'
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.showsBackgroundLocationIndicator = true
@@ -54,7 +54,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    // FIXME: notifications not working
+    // TODO: Only works while app is in the background, on actual device, and seems to go to notification center but not be visible.
     private func postUserNotification(loc: CLLocation) {
         let content = UNMutableNotificationContent()
         content.title = "Location Updated"
@@ -67,13 +67,50 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             if let error = error {
                 print("Error requesting user notification: \(error)")
             }
-            else { print("all good posting notification?!") } // TODO: remove else clause
         }
+    }
+    
+    private func processUpdate(loc: CLLocation) {
+        save(loc)
+        // TODO: play a sound
+        postUserNotification(loc: loc)
+        NotificationCenter.default.post(name: LocationUpdatedNotification, object: loc)
+        sendUpdate(loc: loc)
+    }
+    
+    private func sendUpdate(loc: CLLocation) {
+        let mode: String
+        let urlWithLoc = "https://httpbin.org/anything?lat=\(loc.coordinate.latitude)&long=\(loc.coordinate.longitude)" // TODO: url escaping...
+        let session: URLSession
+        switch UIApplication.shared.applicationState {
+        case .active:
+            mode = "Active"
+            session = URLSession(configuration: .default)
+        case .inactive:
+            mode = "Inactive"
+            session = URLSession(configuration: .default)
+        default:
+            mode = "Background"
+            session = URLSession(configuration: .background(withIdentifier: "com.methodup.BackgroundBaby"))
+        }
+        let url = URL(string: urlWithLoc)
+        let dataTask = session.dataTask(with: url!) { [weak self] data, response, error in
+            let responseString: String
+            if let error = error {
+                responseString = "Error: \(error)"
+            } else if let data = data, let response = response as? HTTPURLResponse {
+                responseString = "\(response.statusCode) - \(url!.absoluteString) - \(String(describing:data.count))"
+            } else {
+                responseString = "No error or data?"
+            }
+            self?.save("RESPONSE:  \(mode) - \(Date()) - \(responseString)")
+        }
+        dataTask.resume()
     }
     
     // MARK: - Delegate Methods
     
-    // Hit three times at launch
+    // Hit three times at launch. That's basically it in simulator, but actual devices are constantly updating (as configured).
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let loc = locations.last else { return }
         
@@ -83,12 +120,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
         lastUpdate = loc.timestamp
-        
         print("\(loc)")
-        save(loc)
-        // TODO: play a sound
-        postUserNotification(loc: loc)
-        NotificationCenter.default.post(name: LocationUpdatedNotification, object: loc)
+        processUpdate(loc: loc)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -126,6 +159,20 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             locations.add(loc.shortString())
         } else {
             locations = [loc.shortString()]
+        }
+        let locArray = locations.array
+        UserDefaults.standard.set(locArray, forKey: persistenceKey)
+    }
+    
+    /** Naive persistence. */
+    private func save(_ responseString: String) {
+        var locations: NSMutableOrderedSet
+        if let priorLocations = getAllLocations() {
+            locations = NSMutableOrderedSet()
+            locations.addObjects(from: priorLocations)
+            locations.add(responseString)
+        } else {
+            locations = [responseString]
         }
         let locArray = locations.array
         UserDefaults.standard.set(locArray, forKey: persistenceKey)
