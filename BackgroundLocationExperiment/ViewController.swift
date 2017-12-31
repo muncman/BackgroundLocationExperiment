@@ -27,7 +27,6 @@ class ViewController: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if let locMgr = appDelegate.locationManager, let locations = locMgr.getAllLocations(), let loc = locations.last as? String {
-            // TODO: nasty inconsistency (arising from storage mechanism)
             lastUpdateLabel.text = "\(Date())"
             lastLocationLabel.text = loc
         }
@@ -58,14 +57,14 @@ class ViewController: UIViewController {
     
     @IBAction func clearLocations() {
         let confirmation = UIAlertController(title: "Clear all location data?", message: "Are you sure?", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
+        confirmation.addAction(noAction)
         let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (alert) in
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let locMgr = appDelegate.locationManager
             locMgr?.clearOldLocations()
         }
         confirmation.addAction(yesAction)
-        let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
-        confirmation.addAction(noAction)
         present(confirmation, animated: true, completion: nil)
     }
     
