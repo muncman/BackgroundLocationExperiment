@@ -17,6 +17,7 @@
 		383FC4661FF456A40088DF8B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383FC4651FF456A40088DF8B /* CoreLocation.framework */; };
 		383FC4681FF45FE40088DF8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383FC4671FF45FE40088DF8B /* Main.storyboard */; };
 		385C386A1FF4CE1600EDEBB4 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385C38691FF4CE1600EDEBB4 /* LocationInfo.swift */; };
+		38AC127D1FF94E21006B92C4 /* BasicCrashHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC127C1FF94E21006B92C4 /* BasicCrashHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,10 @@
 		383FC4651FF456A40088DF8B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		383FC4671FF45FE40088DF8B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		385C38691FF4CE1600EDEBB4 /* LocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
+		38AC127A1FF94E21006B92C4 /* BackgroundLocationExperiment-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BackgroundLocationExperiment-Bridging-Header.h"; sourceTree = "<group>"; };
+		38AC127B1FF94E21006B92C4 /* BasicCrashHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicCrashHandler.h; sourceTree = "<group>"; };
+		38AC127C1FF94E21006B92C4 /* BasicCrashHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicCrashHandler.m; sourceTree = "<group>"; };
+		38AC127E1FF94F31006B92C4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,11 +94,15 @@
 			children = (
 				383FC43F1FF4366B0088DF8B /* AppDelegate.swift */,
 				383FC4461FF4366B0088DF8B /* Assets.xcassets */,
+				38AC127A1FF94E21006B92C4 /* BackgroundLocationExperiment-Bridging-Header.h */,
+				38AC127B1FF94E21006B92C4 /* BasicCrashHandler.h */,
+				38AC127C1FF94E21006B92C4 /* BasicCrashHandler.m */,
 				383FC44B1FF4366B0088DF8B /* Info.plist */,
 				383FC4481FF4366B0088DF8B /* LaunchScreen.storyboard */,
 				383FC4611FF456310088DF8B /* Location */,
 				383FC4671FF45FE40088DF8B /* Main.storyboard */,
 				383FC4411FF4366B0088DF8B /* ViewController.swift */,
+				38AC127E1FF94F31006B92C4 /* PrefixHeader.pch */,
 			);
 			path = BackgroundLocationExperiment;
 			sourceTree = "<group>";
@@ -175,6 +184,7 @@
 				TargetAttributes = {
 					383FC43B1FF4366B0088DF8B = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -236,6 +246,7 @@
 				383FC4631FF4568E0088DF8B /* LocationManager.swift in Sources */,
 				383FC4421FF4366B0088DF8B /* ViewController.swift in Sources */,
 				383FC4401FF4366B0088DF8B /* AppDelegate.swift in Sources */,
+				38AC127D1FF94E21006B92C4 /* BasicCrashHandler.m in Sources */,
 				385C386A1FF4CE1600EDEBB4 /* LocationInfo.swift in Sources */,
 				383FC4601FF439CB0088DF8B /* LocationsTableViewController.swift in Sources */,
 			);
@@ -382,12 +393,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 825MF8C7NT;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BackgroundLocationExperiment/PrefixHeader.pch;
 				INFOPLIST_FILE = BackgroundLocationExperiment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.methodup.BackgroundLocationExperiment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BackgroundLocationExperiment/BackgroundLocationExperiment-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -397,12 +413,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 825MF8C7NT;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BackgroundLocationExperiment/PrefixHeader.pch;
 				INFOPLIST_FILE = BackgroundLocationExperiment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.methodup.BackgroundLocationExperiment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BackgroundLocationExperiment/BackgroundLocationExperiment-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
