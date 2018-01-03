@@ -23,6 +23,7 @@
     sigaction(SIGBUS, &newSignalAction, NULL);
     sigaction(SIGTRAP, &newSignalAction, NULL);
     sigaction(SIGSTOP, &newSignalAction, NULL);
+    //UILog(@"Crash Handler has been set up.");
 }
 
 /** Signal catcher */

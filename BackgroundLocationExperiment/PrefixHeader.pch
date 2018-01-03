@@ -11,8 +11,7 @@
 
 #ifdef DEBUG
 
-// TODO: Make sure this happens on the main thread.
-#define UILog(fmt, ...)  { UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"UILog" message:[NSString stringWithFormat:fmt, ##__VA_ARGS__] preferredStyle:UIAlertControllerStyleAlert]; [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }]]; [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil]; }
+#define UILog(fmt, ...)  { dispatch_async(dispatch_get_main_queue(), ^{ UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"UILog" message:[NSString stringWithFormat:fmt, ##__VA_ARGS__] preferredStyle:UIAlertControllerStyleAlert]; [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }]]; [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil]; }); }
 
 #else
 
